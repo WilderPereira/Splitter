@@ -24,7 +24,24 @@ def split(file_name, number_of_files):
 
 def main(argv):
 	#sys.argv[1] is the input file  | sys.argv[2] the number of files
-	split(sys.argv[1],int(sys.argv[2]))
+	file = ''
+	number_of_files = ''
+	try:
+		opts, args = getopt.getopt(argv,"hi:n:",["ifile=","nfiles="])
+	except getopt.GetoptError:
+		print 'file_splitter.py -i <input file> -n <number of files>'
+		#sys.exit(2)
+	for opt, arg in opts:
+		if opt == '-h':
+			print 'file_splitter.py -i <input file> -n <number of files>\nfile_splitter.py --ifile <input file> --nfiles <number of files>'
+			sys.exit()
+		elif opt in ("-i", "--ifile"):
+			file = arg
+		elif opt in ("-n", "--nfiles"):
+			number_of_files = arg
+		
+	
+	split(file,int(number_of_files))
 
 if __name__ == "__main__":
    main(sys.argv[1:])
